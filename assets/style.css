@@ -17,12 +17,25 @@
   min-height: 100vh;
 }
 
+
 .container {
   min-width: 320px;
   padding: 1rem;
   border: 2px solid black;
   border-radius: 1rem;
   
+}
+
+.error {
+  display:block;
+}
+
+.required {
+  color: red;
+}
+
+.btn-enviar {
+  width: 100%;
 }
 
 /* Modo oscuro */
