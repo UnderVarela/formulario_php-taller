@@ -32,6 +32,7 @@
         </label>
       </div>
       <?=$errores ? $errores : ''?>
-      <button class="btn-enviar">Enviar</button>
+      <?=isset($_REQUEST['enviado']) ? '<mark>Mensaje enviado correctamente</mark>' : ''?>
+      <button name="btn-enviar" class="btn-enviar">Enviar</button>
     </form>
   </main>

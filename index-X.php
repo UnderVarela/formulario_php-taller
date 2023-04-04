@@ -9,7 +9,7 @@
 $errores = '';
 
 if(isset($_POST['btn-enviar'])) {
-  
+
   // nombre
  $nombre = $_POST['nombre-completo'];
  $nombre = trim($nombre);
@@ -25,10 +25,9 @@ if(isset($_POST['btn-enviar'])) {
   if (strlen($correo) === 0) {
    $errores.='<strong class="error">El campo correo no es válido</strong>';
   } else if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    $errores.=sprintf('El correo <mark>%s</mark> no es válido',$correo);
+    $errores.=sprintf('<strong class="error">El correo <mark>%s</mark> no es válido</strong>',$correo);
   }
 
-  
   
 // mensaje
  $mensaje = $_POST['mensaje'];
@@ -37,6 +36,20 @@ if(isset($_POST['btn-enviar'])) {
  if (strlen($mensaje) === 0) {
   $errores.='<strong class="error">El campo mensaje no puede estar vacío</strong>';
  }
+
+ // Politica privacidad
+ if (!isset($_POST['politica-privacidad'])) {
+  $errores.='<strong class="error">Es necesario chequear la Politica de privacidad</strong>';
+ }
+
+}
+
+// Envio correo una vez validado
+if($errores==='' && isset($_POST['btn-enviar'])) {
+  $texto = str_replace("\n.", "\n..", $_POST['mensaje']);
+  $enviado = mail($_POST['correo'], 'Compra del cliente ---> '.$_POST['nombre-completo'], $texto);
+
+if ($enviado) header ('Location: index-X.php?enviado=true');
 }
 
 // Vistas
